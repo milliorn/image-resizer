@@ -5,7 +5,10 @@ const isDev = process.env.NODE_ENV !== "production";
 const isMac = process.platform === "darwin";
 
 function createMainWindow() {
-  /* instance main browser window */
+  /*
+    instance main browser window
+    https://www.electronjs.org/docs/latest/api/browser-window
+  */
   const mainWindow = new BrowserWindow({
     height: 360,
     title: "Image Resizer",
@@ -23,9 +26,25 @@ function createMainWindow() {
   mainWindow.loadFile(path.join(__dirname, "./renderer/index.html"));
 }
 
+/* Instance About window */
+function createAboutWindow() {
+  const aboutWindow = new BrowserWindow({
+    height: 320,
+    title: "About Image Resizer",
+    width: isDev ? 640 : 320,
+    x: 0,
+    y: 0,
+  });
+
+  /* load render/front end */
+  aboutWindow.loadFile(path.join(__dirname, "./renderer/about.html"));
+}
+
+/* https://www.electronjs.org/docs/latest/api/app */
 app.whenReady().then(() => {
   createMainWindow();
 
+  /* https://www.electronjs.org/docs/latest/api/menu */
   /* add menu */
   const mainMenu = Menu.buildFromTemplate(menu);
   Menu.setApplicationMenu(mainMenu);
@@ -45,6 +64,7 @@ const menu = [
           submenu: [
             {
               label: "About",
+              click: createAboutWindow,
             },
           ],
         },
@@ -57,7 +77,12 @@ const menu = [
     ? [
         {
           label: "Help",
-          submenu: "About",
+          submenu: [
+            {
+              label: "About",
+              click: createAboutWindow,
+            },
+          ],
         },
       ]
     : []),
@@ -65,5 +90,7 @@ const menu = [
 
 // Quit when all windows are closed.
 app.on("window-all-closed", () => {
-  if (!isMac) app.quit();
+  if (!isMac) {
+    app.quit();
+  }
 });
