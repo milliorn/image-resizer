@@ -1,13 +1,29 @@
 // Some JavaScript to load the image and show the form. There is no actual backend functionality. This is just the UI
-
+const filename = document.querySelector("#filename");
 const form = document.querySelector("#img-form");
+const heightInput = document.querySelector("#height");
 const img = document.querySelector("#img");
 const outputPath = document.querySelector("#output-path");
-const filename = document.querySelector("#filename");
-const heightInput = document.querySelector("#height");
 const widthInput = document.querySelector("#width");
 
 //console.log(versions.node());
+
+function sendImage(e) {
+  e.preventDefault();
+  /* add properties to the file object */
+  const height = heightInput.value;
+  const imgPath = img.files[0].path;
+  const width = widthInput.value;
+
+  if (!img.files[0]) {
+    alertError("Upload an image.");
+  }
+
+  if (width === "" || height === "") {
+    alertError("Fill in height and width");
+    return;
+  }
+}
 
 function loadImage(e) {
   /* get the image */
@@ -65,4 +81,5 @@ function alertError(message) {
 /*  File select listener */
 img.addEventListener("change", loadImage);
 
-document.querySelector("#img").addEventListener("change", loadImage);
+/* Form submit listener */
+form.addEventListener("submit", sendImage);
