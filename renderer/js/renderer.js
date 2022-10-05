@@ -16,6 +16,14 @@ function loadImage(e) {
     return;
   }
 
+  // get dimensions
+  const image = new Image();
+  image.src = URL.createObjectURL(file);
+  image.onload = function () {
+    heightInput.value = this.height;
+    widthInput.value = this.width;
+  };
+
   form.style.display = "block";
   /* document.querySelector("#filename") */ filename.innerHTML = file.name;
 }
