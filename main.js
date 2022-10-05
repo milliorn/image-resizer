@@ -1,7 +1,9 @@
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
-const { app, BrowserWindow, Menu, ipcMain } = require("electron");
+const resizeImg = require("resize-img");
+
+const { app, BrowserWindow, Menu, ipcMain, shell } = require("electron");
 
 const isDev = process.env.NODE_ENV !== "production";
 const isMac = process.platform === "darwin";
@@ -109,3 +111,34 @@ ipcMain.on("image:resize", (e, options) => {
   options.dest = path.join(os.homedir(), "image-resizer");
   resizeImage(options);
 });
+
+/* resize and save image */
+async function resizeImage({ imgPath, height, width, dest }) {
+  try {
+    console.log(imgPath, height, width, dest);
+
+    /* resize image */
+    const newPath = await resizeImg(fs.readFileSync(imgPath), {
+      width: +width,
+      height: +height,
+    });
+
+    const filename = path.basename(imgPath);
+
+    /* create destination folder */
+    if (!fs.existsSync(dest)) {
+      fs.mkdirSync(dest);
+    }
+
+    /* write to file to destination folder */
+    fs.writeFileSync(path.join(dest, filename), newPath);
+
+    /* send to renderer */
+    mainWindow.webContents.send("image:done");
+
+    /* open the folder in explorer */
+    shell.openPath(dest);
+  } catch (error) {
+    console.log(error);
+  }
+}
