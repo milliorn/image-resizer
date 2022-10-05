@@ -1,5 +1,6 @@
 const path = require("path");
 const { app, BrowserWindow, Menu } = require("electron");
+const { version } = require("os");
 
 const isDev = process.env.NODE_ENV !== "production";
 const isMac = process.platform === "darwin";
@@ -15,6 +16,12 @@ function createMainWindow() {
     width: isDev ? 1280 : 640,
     x: 0,
     y: 0,
+    webPreferences: {
+      /* used for preload.js */
+      contextIsolation: true,
+      nodeIntegration: true,
+      preload: path.join(__dirname, "preload.js"),
+    },
   });
 
   // open devtools if in dev

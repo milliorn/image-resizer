@@ -7,6 +7,8 @@ const filename = document.querySelector("#filename");
 const heightInput = document.querySelector("#height");
 const widthInput = document.querySelector("#width");
 
+//console.log(versions.node());
+
 function loadImage(e) {
   /* get the image */
   const file = e.target.files[0];
