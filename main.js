@@ -7,9 +7,9 @@ const isMac = process.platform === "darwin";
 function createMainWindow() {
   /* instance main browser window */
   const mainWindow = new BrowserWindow({
+    height: 360,
     title: "Image Resizer",
     width: isDev ? 1280 : 640,
-    height: 360,
     x: 0,
     y: 0,
   });
@@ -36,18 +36,31 @@ app.whenReady().then(() => {
   });
 });
 
-/* menu */
+/* menu (toolbar) */
 const menu = [
+  ...(isMac
+    ? [
+        {
+          label: app.name,
+          submenu: [
+            {
+              label: "About",
+            },
+          ],
+        },
+      ]
+    : []),
   {
-    label: "File",
-    submenu: [
-      {
-        label: "Quit",
-        click: () => app.quit(),
-        accelerator: "CmdOrCtrl+W", // shortcut to Quit
-      },
-    ],
+    role: "fileMenu",
   },
+  ...(!isMac
+    ? [
+        {
+          label: "Help",
+          submenu: "About",
+        },
+      ]
+    : []),
 ];
 
 // Quit when all windows are closed.
