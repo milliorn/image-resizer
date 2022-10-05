@@ -5,7 +5,7 @@
   "main": "main.js",
   "productName": "Image Resizer",
   "scripts": {
-    "start": "electron ."
+    "start": "npx electronmon ."
   },
   "repository": {
     "type": "git",
