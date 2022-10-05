@@ -4,6 +4,8 @@ const path = require("path");
 
 /* https://www.electronjs.org/docs/latest/api/context-bridge */
 const { contextBridge } = require("electron");
+const Toastify = require("toastify-js");
+
 /*
   Preload scripts are injected before a web page loads in the renderer,
   similar to a Chrome extension's content scripts.
@@ -16,4 +18,8 @@ contextBridge.exposeInMainWorld("os", {
 
 contextBridge.exposeInMainWorld("path", {
   join: (...args) => path.join(...args),
+});
+
+contextBridge.exposeInMainWorld("Toastify", {
+  toast: (options) => Toastify(options).showToast(),
 });
