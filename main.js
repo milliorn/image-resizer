@@ -8,12 +8,14 @@ const { app, BrowserWindow, Menu, ipcMain, shell } = require("electron");
 const isDev = process.env.NODE_ENV !== "production";
 const isMac = process.platform === "darwin";
 
+let mainWindow;
+
 function createMainWindow() {
   /*
     instance main browser window
     https://www.electronjs.org/docs/latest/api/browser-window
   */
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     height: 360,
     title: "Image Resizer",
     width: isDev ? 1280 : 640,
@@ -58,6 +60,9 @@ app.whenReady().then(() => {
   /* add menu */
   const mainMenu = Menu.buildFromTemplate(menu);
   Menu.setApplicationMenu(mainMenu);
+
+  /* remove mainWindow onclose */
+  mainWindow.on("closed", () => (mainWindow = null));
 
   // Open a window if none are open (macOS)
   app.on("activate", () => {
