@@ -23,6 +23,13 @@ function sendImage(e) {
     alertError("Fill in height and width");
     return;
   }
+
+  //send to main with ipcRenderer
+  ipcRenderer.send("image:resize", {
+    imgPath,
+    width,
+    height,
+  });
 }
 
 function loadImage(e) {

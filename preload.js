@@ -2,8 +2,11 @@
 const os = require("os");
 const path = require("path");
 
-/* https://www.electronjs.org/docs/latest/api/context-bridge */
-const { contextBridge } = require("electron");
+/*
+  https://www.electronjs.org/docs/latest/api/context-bridge
+  https://www.electronjs.org/docs/latest/api/ipc-renderer
+*/
+const { contextBridge, ipcRenderer } = require("electron");
 const Toastify = require("toastify-js");
 
 /*
@@ -22,4 +25,10 @@ contextBridge.exposeInMainWorld("path", {
 
 contextBridge.exposeInMainWorld("Toastify", {
   toast: (options) => Toastify(options).showToast(),
+});
+
+contextBridge.exposeInMainWorld("ipcRenderer", {
+  send: (channel, data) => ipcRenderer.send(channel, data),
+  on: (channel, func) =>
+    ipcRenderer.on(channel, (event, ...args) => func(...args)),
 });
