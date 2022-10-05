@@ -28,6 +28,7 @@ function loadImage(e) {
 
   form.style.display = "block";
   /* document.querySelector("#filename") */ filename.innerHTML = file.name;
+  outputPath.innerText = path.join(os.homedir(), "image-resizer");
 }
 
 function isFileImage(file) {
