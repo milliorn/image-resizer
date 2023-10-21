@@ -1,5 +1,7 @@
 # Image Resizer (Desktop)
 
+[![CodeQL](https://github.com/milliorn/image-resizer/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/milliorn/image-resizer/actions/workflows/github-code-scanning/codeql)
+
 Image Resizer (Desktop) is a simple desktop application that allows users to resize images directly on their desktop. With this tool, you can quickly adjust the dimensions of your images to fit specific requirements for various use cases.
 
 ## Features
