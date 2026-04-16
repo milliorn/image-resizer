@@ -1,6 +1,6 @@
 {
   "name": "image-resizer",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "resize images on desktop",
   "main": "main.js",
   "productName": "Image Resizer",
