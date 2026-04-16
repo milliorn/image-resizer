@@ -1,0 +1,32 @@
+documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - README.md
+          - LICENSE
+          - "docs/**"
+
+github_actions:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/**"
+
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file:
+          - package.json
+          - package-lock.json
+
+javascript:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/*.js"
+
+assets:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "assets/**"
+
+renderer:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "renderer/**"
