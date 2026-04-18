@@ -125,12 +125,6 @@ async function resizeImage({ imgPath, height, width, dest }) {
   try {
     console.log(imgPath, height, width, dest);
 
-    /* resize image */
-    const newPath = await resizeImg(fs.readFileSync(imgPath), {
-      width: +width,
-      height: +height,
-    });
-
     const filename = path.basename(imgPath);
 
     /* create destination folder */
@@ -138,8 +132,8 @@ async function resizeImage({ imgPath, height, width, dest }) {
       fs.mkdirSync(dest);
     }
 
-    /* write to file to destination folder */
-    fs.writeFileSync(path.join(dest, filename), newPath);
+    /* resize and write image */
+    await sharp(imgPath).resize(+width, +height).toFile(path.join(dest, filename));
 
     /* send to renderer */
     mainWindow.webContents.send("image:done");
