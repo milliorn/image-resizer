@@ -1,7 +1,7 @@
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
-const resizeImg = require("resize-img");
+const sharp = require("sharp");
 
 const { app, BrowserWindow, Menu, ipcMain, shell } = require("electron");
 
