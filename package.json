@@ -21,7 +21,7 @@
     "minimist": "^1.2.8"
   },
   "dependencies": {
-    "electron": "^37.8.0",
+    "electron": "^41.2.1",
     "resize-img": "^2.0.0",
     "toastify-js": "^1.12.0"
   }
