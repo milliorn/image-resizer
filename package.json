@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "electron": "^41.2.1",
-    "resize-img": "^2.0.0",
+    "resize-img": "^1.1.2",
     "toastify-js": "^1.12.0"
   }
 }
