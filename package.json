@@ -17,6 +17,9 @@
     "url": "https://github.com/milliorn/desktop-image-resizer/issues"
   },
   "homepage": "https://github.com/milliorn/desktop-image-resizer#readme",
+  "overrides": {
+    "minimist": "^1.2.8"
+  },
   "dependencies": {
     "electron": "^37.8.0",
     "resize-img": "^2.0.0",
