@@ -133,7 +133,9 @@ async function resizeImage({ imgPath, height, width, dest }) {
     }
 
     /* resize and write image */
-    await sharp(imgPath).resize(+width, +height).toFile(path.join(dest, filename));
+    await sharp(imgPath)
+      .resize(+width, +height)
+      .toFile(path.join(dest, filename));
 
     /* send to renderer */
     mainWindow.webContents.send("image:done");
